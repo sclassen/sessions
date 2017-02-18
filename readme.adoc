@@ -1,0 +1,4 @@
+== Material of my sessions
+
+Find all material for the sessions (mostly talks at conferences) I held in this repository.
+
