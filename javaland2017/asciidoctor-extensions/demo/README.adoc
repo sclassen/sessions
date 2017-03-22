@@ -1,0 +1,8 @@
+= Hacking
+
+== Start
+
+- Show *build.gradle*
+- Show *resources*
+- Show *SimpleCaptureSpec* and run it
+- Show */tmp/aDoc.html*
