@@ -11,5 +11,6 @@ class ScreenshotExtensionRegistry implements ExtensionRegistry {
         JavaExtensionRegistry registry = asciidoctor.javaExtensionRegistry()
 
         registry.blockMacro('screenshot', ScreenshotBlockMacroProcessor)
+        registry.block('geb', GebBlockProcessor)
     }
 }

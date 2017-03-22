@@ -83,3 +83,44 @@ Browser.drive {
 
 String imagePath = '/tmp/screenshot.png'
 ----
+
+== Geb macro
+
+implement macro
+
+[source, groovy]
+.GebBlockMacroProcessor.groovy
+----
+class GebBlockProcessor extends BlockProcessor {
+
+    GebBlockProcessor(String name, Map<String, Object> config) {
+        super(name, [contexts: [':literal']])
+    }
+
+    @Override
+    Object process(AbstractBlock parent, Reader reader, Map<String, Object> attributes) {
+        String gebCode = reader.read()
+
+        GroovyShell shell = new GroovyShell(new Binding([Browser: Browser]))
+        shell.evaluate("Browser.drive{" + gebCode + "}")
+
+        createBlock(parent, "skip", "", [:], [:])
+    }
+}
+----
+
+register extension
+
+[source, groovy]
+.ScreenshotExtensionRegistry.groovy - excerpt
+----
+registry.macro('geb', GebMacroProcessor)
+----
+
+remove target from screenshot macro in test
+
+[source, groovy]
+.SimpleCaptureSpec.groovy - excerpt
+----
+screenshot::[]
+----

@@ -15,7 +15,7 @@ go "${url}"
 \$("input").value("JavaLand 2017")
 ....
 
-screenshot::${url}[]
+screenshot::[]
 
 """
 
