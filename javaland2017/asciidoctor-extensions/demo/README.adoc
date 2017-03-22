@@ -6,3 +6,48 @@
 - Show *resources*
 - Show *SimpleCaptureSpec* and run it
 - Show */tmp/aDoc.html*
+
+== Static image block macro
+
+expect logo.png to be placed in html output
+
+[source, groovy]
+.SimpleCaptureSpec.groovy - excerpt
+----
+then:
+  html =~ /<img src=".*logo\.png/
+----
+
+implement block macro
+
+[source, groovy]
+.ScreenshotBlockMacroProcessor.groovy
+----
+class ScreenshotBlockMacroProcessor extends BlockMacroProcessor {
+
+    ScreenshotBlockMacroProcessor(String macroName, Map<String, Object> config) {
+        super(macroName, config)
+    }
+
+    @Override
+    protected Object process(AbstractBlock parent, String target, Map<String, Object> attributes) {
+        String imagePath = getClass().classLoader.getResource('logo.png')
+
+        createBlock(parent, "image", "", [
+                target: imagePath
+        ], [:])
+    }
+}
+----
+
+register extension
+
+[source, groovy]
+.ScreenshotExtensionRegistry.groovy - excerpt
+----
+void register(Asciidoctor asciidoctor) {
+    JavaExtensionRegistry registry = asciidoctor.javaExtensionRegistry()
+
+    registry.blockMacro('screenshot', ScreenshotBlockMacroProcessor)
+}
+----
