@@ -51,3 +51,35 @@ void register(Asciidoctor asciidoctor) {
     registry.blockMacro('screenshot', ScreenshotBlockMacroProcessor)
 }
 ----
+
+== Screenshot image block macro
+
+expect screenshot.png to be placed in html output
+
+[source, groovy]
+.SimpleCaptureSpec.groovy - excerpt
+----
+then:
+  html =~ /<img src=".*screenshot\.png/
+----
+
+implement geb code to capture screen
+
+[source, groovy]
+.ScreenshotBlockMacroProcessor.groovy - excerpt
+----
+Browser.drive {
+    Browser browser = delegate as Browser
+    browser.driver.manage().window().size = new Dimension(800, 600)
+    browser.config.reporter = new ScreenshotReporter()
+    browser.config.reportsDir = '/tmp' as File
+
+    if (target) {
+        go target
+    }
+
+    report 'screenshot'
+}
+
+String imagePath = '/tmp/screenshot.png'
+----

@@ -1,7 +1,10 @@
 package demo
 
+import geb.Browser
+import geb.report.ScreenshotReporter
 import org.asciidoctor.ast.AbstractBlock
 import org.asciidoctor.extension.BlockMacroProcessor
+import org.openqa.selenium.Dimension
 
 class ScreenshotBlockMacroProcessor extends BlockMacroProcessor {
 
@@ -11,7 +14,20 @@ class ScreenshotBlockMacroProcessor extends BlockMacroProcessor {
 
     @Override
     protected Object process(AbstractBlock parent, String target, Map<String, Object> attributes) {
-        String imagePath = getClass().classLoader.getResource('logo.png')
+        Browser.drive {
+            Browser browser = delegate as Browser
+            browser.driver.manage().window().size = new Dimension(800, 600)
+            browser.config.reporter = new ScreenshotReporter()
+            browser.config.reportsDir = '/tmp' as File
+
+            if (target) {
+                go target
+            }
+
+            report 'screenshot'
+        }
+
+        String imagePath = '/tmp/screenshot.png'
 
         createBlock(parent, "image", "", [
                 target: imagePath
