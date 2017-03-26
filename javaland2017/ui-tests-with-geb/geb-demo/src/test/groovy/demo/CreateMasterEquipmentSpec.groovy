@@ -31,8 +31,8 @@ class CreateMasterEquipmentSpec extends BaseSpec {
           p = at EquipmentDetailsEditPage
 
         when:
-          p.inputPruefbankName << testEquipmentName
-          p.inputPruefbankExecutor << EXECUTOR_INPUT
+          p.inputPruefbankName = testEquipmentName
+          p.inputPruefbankExecutor = EXECUTOR_INPUT
           p.selectPruefbankType(MINIBANK)
 
         then:
