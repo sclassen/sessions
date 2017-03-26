@@ -23,7 +23,7 @@ abstract class BaseSpec extends GebReportingSpec {
         return browser.to(page)
     }
 
-    protected executeQuery(String q) {
+    protected executeQuery(String q, Object... args) {
         // omitted
     }
 }

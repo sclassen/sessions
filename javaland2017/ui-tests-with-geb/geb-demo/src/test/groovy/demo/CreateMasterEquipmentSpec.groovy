@@ -26,7 +26,7 @@ class CreateMasterEquipmentSpec extends BaseSpec {
           at EquipmentCreatePage
     }
 
-    void "fill equipment values and save"() {
+    void "fill equipment values"() {
         given:
           p = at EquipmentCreatePage
 
@@ -73,6 +73,6 @@ class CreateMasterEquipmentSpec extends BaseSpec {
     }
 
     void cleanupSpec(){
-        executeQuery("delete * from Pruefbank where name='" + testEquipmentName + "'")
+        executeQuery("delete from Pruefbank where name=?", testEquipmentName)
     }
 }
