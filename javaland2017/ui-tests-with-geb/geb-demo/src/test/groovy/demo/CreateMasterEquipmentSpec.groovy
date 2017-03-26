@@ -23,12 +23,12 @@ class CreateMasterEquipmentSpec extends BaseSpec {
           p = p.createNewEquipment()
 
         then:
-          at EquipmentDetailsEditPage
+          at EquipmentCreatePage
     }
 
     void "fill equipment values and save"() {
         given:
-          p = at EquipmentDetailsEditPage
+          p = at EquipmentCreatePage
 
         when:
           p.inputPruefbankName = testEquipmentName
@@ -41,7 +41,7 @@ class CreateMasterEquipmentSpec extends BaseSpec {
 
     void "save new equipment"() {
         given:
-          p = at EquipmentDetailsEditPage
+          p = at EquipmentCreatePage
 
         when:
           p = p.saveNewEquipment()

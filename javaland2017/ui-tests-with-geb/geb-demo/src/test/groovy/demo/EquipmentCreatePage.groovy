@@ -3,7 +3,7 @@ package demo
 import geb.Page
 import org.openqa.selenium.Keys
 
-class EquipmentDetailsEditPage extends Page {
+class EquipmentCreatePage extends Page {
 
     static at = {
         title == 'Equipment Management'

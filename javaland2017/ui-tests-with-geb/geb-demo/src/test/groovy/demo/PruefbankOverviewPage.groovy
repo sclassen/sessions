@@ -29,10 +29,10 @@ class PruefbankOverviewPage extends Page {
         return browser.at(EquipmentDetailsViewPage)
     }
 
-    EquipmentDetailsEditPage createNewEquipment() {
+    EquipmentCreatePage createNewEquipment() {
         createEquipmentButton.click()
 
-        return browser.at(EquipmentDetailsEditPage)
+        return browser.at(EquipmentCreatePage)
     }
 
 }
